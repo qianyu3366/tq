@@ -3,7 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌈 多功能生活门户 | Life Portal</title>
+<title>多功能生活门户 | Life Portal — 天气·美食·景点·星座·工具</title>
+<meta name="description" content="一站式生活门户：实时天气预报、中国12城特色美食与热门景点、每日星座运势、番茄钟、世界时钟、单位换算等实用工具。">
+<meta name="keywords" content="生活门户,天气预报,美食推荐,景点攻略,星座运势,番茄钟,世界时钟,Life Portal">
+<meta name="author" content="陈文轩">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://qianyu3366.github.io/tq/">
+<meta name="theme-color" content="#302b63">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="多功能生活门户 | Life Portal">
+<meta property="og:description" content="一站式生活门户：天气预报、特色美食、热门景点、星座运势与实用工具。">
+<meta property="og:url" content="https://qianyu3366.github.io/tq/">
+<meta property="og:site_name" content="Life Portal">
+<meta property="og:locale" content="zh_CN">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多功能生活门户 | Life Portal">
+<meta name="twitter:description" content="一站式生活门户：天气预报、特色美食、热门景点、星座运势与实用工具。">
+<!-- Favicon (SVG emoji fallback) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+<!-- Preconnect -->
+<link rel="preconnect" href="https://api.open-meteo.com">
+<link rel="dns-prefetch" href="https://api.open-meteo.com">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--glass:rgba(255,255,255,.12);--glass2:rgba(255,255,255,.18);--glass3:rgba(255,255,255,.25);--text:#fff;--text2:rgba(255,255,255,.7);--accent:#64b5f6;--accent2:#f06292;--shadow:0 8px 32px rgba(0,0,0,.2);--radius:16px;--radius2:24px}
@@ -233,7 +255,7 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;min-height:100vh;overfl
 <div class="aurora"><span></span><span></span><span></span></div>
 <canvas id="particles"></canvas>
 
-<div id="welcome">
+<header id="welcome" role="banner">
   <div id="welcome-video-bg">
     <canvas id="welcome-video-canvas"></canvas>
     <video id="welcome-video" muted playsinline preload="auto" crossorigin="anonymous" loop
@@ -267,26 +289,26 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;min-height:100vh;overfl
       邮箱：<a href="mailto:alieuklok983@gmail.com">alieuklok983@gmail.com</a>
     </div>
   </div>
-</div>
+</header>
 
-<div id="app">
-  <div class="top-bar">
+<main id="app">
+  <nav class="top-bar" aria-label="主导航">
     <div class="logo">🌈 Life Portal</div>
-    <div class="nav-tabs" id="navTabs">
-      <div class="nav-tab active" data-tab="weather">🌤 天气</div>
-      <div class="nav-tab" data-tab="food">🍜 美食</div>
-      <div class="nav-tab" data-tab="attraction">🏯 景点</div>
-      <div class="nav-tab" data-tab="horoscope">♈ 星座</div>
-      <div class="nav-tab" data-tab="tools">🛠 工具</div>
+    <div class="nav-tabs" id="navTabs" role="tablist">
+      <div class="nav-tab active" data-tab="weather" role="tab" aria-selected="true">🌤 天气</div>
+      <div class="nav-tab" data-tab="food" role="tab" aria-selected="false">🍜 美食</div>
+      <div class="nav-tab" data-tab="attraction" role="tab" aria-selected="false">🏯 景点</div>
+      <div class="nav-tab" data-tab="horoscope" role="tab" aria-selected="false">♈ 星座</div>
+      <div class="nav-tab" data-tab="tools" role="tab" aria-selected="false">🛠 工具</div>
     </div>
     <div class="top-actions">
-      <button class="top-btn" id="langBtn" title="EN/中">文</button>
-      <button class="top-btn" id="musicToggle" title="音乐">♫</button>
+      <button class="top-btn" id="langBtn" title="EN/中" aria-label="切换语言">文</button>
+      <button class="top-btn" id="musicToggle" title="音乐" aria-label="背景音乐开关">♫</button>
     </div>
-  </div>
+  </nav>
 
   <!-- WEATHER -->
-  <div class="tab-section active" id="tab-weather">
+  <section class="tab-section active" id="tab-weather" role="tabpanel" aria-label="天气预报">
     <div class="search-box">
       <input type="text" id="cityInput" placeholder="搜索城市..." />
       <button onclick="searchCity()" id="searchBtn">搜索</button>
@@ -302,7 +324,7 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;min-height:100vh;overfl
         <div class="weather-desc" id="wDesc">--</div>
       </div>
       <div class="char-area">
-        <img id="charImg" src="" alt="character" />
+        <img id="charImg" src="" alt="天气助手角色插图" />
         <div class="char-msg" id="charMsg">你好呀～</div>
       </div>
     </div>
@@ -329,31 +351,31 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;min-height:100vh;overfl
         <button onclick="pomoAction('short')">短休息</button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- FOOD -->
-  <div class="tab-section" id="tab-food">
+  <section class="tab-section" id="tab-food" role="tabpanel" aria-label="本地美食">
     <div class="section-hd"><h2>🍜 本地特色美食</h2><span class="sub" id="foodCitySub">选择城市查看美食</span></div>
     <div class="hot-cities" id="foodCities"></div>
     <div class="food-grid" id="foodGrid"></div>
-  </div>
+  </section>
 
   <!-- ATTRACTIONS -->
-  <div class="tab-section" id="tab-attraction">
+  <section class="tab-section" id="tab-attraction" role="tabpanel" aria-label="热门景点">
     <div class="section-hd"><h2>🏯 热门景点</h2><span class="sub" id="attrCitySub">选择城市查看景点</span></div>
     <div class="hot-cities" id="attrCities"></div>
     <div class="attr-grid" id="attrGrid"></div>
-  </div>
+  </section>
 
   <!-- HOROSCOPE -->
-  <div class="tab-section" id="tab-horoscope">
+  <section class="tab-section" id="tab-horoscope" role="tabpanel" aria-label="星座运势">
     <div class="section-hd"><h2>♈ 今日星座运势</h2><span class="sub">每日更新</span></div>
     <div class="zodiac-grid" id="zodiacGrid"></div>
     <div class="glass zodiac-result" id="zodiacResult" style="display:none"></div>
-  </div>
+  </section>
 
   <!-- TOOLS -->
-  <div class="tab-section" id="tab-tools">
+  <section class="tab-section" id="tab-tools" role="tabpanel" aria-label="实用工具">
     <div class="section-hd"><h2>🛠 实用工具</h2></div>
     <div class="glass" style="margin-bottom:20px">
       <h3 style="font-size:.9em;color:var(--accent);margin-bottom:12px">🌍 世界时钟</h3>
@@ -378,8 +400,28 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;min-height:100vh;overfl
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+</main>
+
+<footer style="display:none" aria-hidden="true">
+  <p>多功能生活门户 Life Portal — 实时天气、美食景点、星座运势、实用工具</p>
+  <p>作者：陈文轩 | 联系邮箱：alieuklok983@gmail.com</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"多功能生活门户 Life Portal",
+  "url":"https://qianyu3366.github.io/tq/",
+  "description":"一站式生活门户：实时天气预报、中国12城特色美食与热门景点、每日星座运势、番茄钟、世界时钟、单位换算等实用工具。",
+  "applicationCategory":"LifestyleApplication",
+  "operatingSystem":"Web",
+  "author":{"@type":"Person","name":"陈文轩","email":"alieuklok983@gmail.com"},
+  "inLanguage":["zh-CN","en"],
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}
+}
+</script>
 
 <div class="music-bar hidden" id="musicBar">
   <button class="m-btn" onclick="togglePlay()">▶</button>
@@ -483,9 +525,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 function initTabs(){
   document.querySelectorAll('.nav-tab').forEach(tab=>{
     tab.addEventListener('click',()=>{
-      document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
       document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
-      tab.classList.add('active');
+      tab.classList.add('active');tab.setAttribute('aria-selected','true');
       document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
     });
   });
@@ -604,15 +646,72 @@ function selectCity(i){
   document.querySelectorAll('#hotCities .hot-city').forEach((el,j)=>el.classList.toggle('active',j===i));
   loadWeather(currentCity);
 }
+const CN_CITIES={
+'北京':{en:'Beijing',lat:39.9042,lon:116.4074},'上海':{en:'Shanghai',lat:31.2304,lon:121.4737},
+'广州':{en:'Guangzhou',lat:23.1291,lon:113.2644},'深圳':{en:'Shenzhen',lat:22.5431,lon:114.0579},
+'成都':{en:'Chengdu',lat:30.5728,lon:104.0668},'杭州':{en:'Hangzhou',lat:30.2741,lon:120.1551},
+'武汉':{en:'Wuhan',lat:30.5928,lon:114.3055},'西安':{en:"Xi'an",lat:34.3416,lon:108.9398},
+'重庆':{en:'Chongqing',lat:29.4316,lon:106.9123},'南京':{en:'Nanjing',lat:32.0603,lon:118.7969},
+'淮安':{en:"Huai'an",lat:33.6104,lon:119.0153},'哈尔滨':{en:'Harbin',lat:45.8038,lon:126.5350},
+'长沙':{en:'Changsha',lat:28.2282,lon:112.9388},'天津':{en:'Tianjin',lat:39.3434,lon:117.3616},
+'苏州':{en:'Suzhou',lat:31.2990,lon:120.5853},'郑州':{en:'Zhengzhou',lat:34.7466,lon:113.6253},
+'长春':{en:'Changchun',lat:43.8171,lon:125.3235},'沈阳':{en:'Shenyang',lat:41.8057,lon:123.4315},
+'大连':{en:'Dalian',lat:38.9140,lon:121.6147},'青岛':{en:'Qingdao',lat:36.0671,lon:120.3826},
+'济南':{en:'Jinan',lat:36.6512,lon:116.9972},'厦门':{en:'Xiamen',lat:24.4798,lon:118.0894},
+'福州':{en:'Fuzhou',lat:26.0745,lon:119.2965},'昆明':{en:'Kunming',lat:25.0389,lon:102.7183},
+'贵阳':{en:'Guiyang',lat:26.6470,lon:106.6302},'南宁':{en:'Nanning',lat:22.8170,lon:108.3665},
+'海口':{en:'Haikou',lat:20.0174,lon:110.3492},'三亚':{en:'Sanya',lat:18.2528,lon:109.5120},
+'拉萨':{en:'Lhasa',lat:29.6500,lon:91.1000},'乌鲁木齐':{en:'Urumqi',lat:43.8256,lon:87.6168},
+'兰州':{en:'Lanzhou',lat:36.0611,lon:103.8343},'西宁':{en:'Xining',lat:36.6171,lon:101.7782},
+'银川':{en:'Yinchuan',lat:38.4872,lon:106.2309},'呼和浩特':{en:'Hohhot',lat:40.8422,lon:111.7500},
+'太原':{en:'Taiyuan',lat:37.8706,lon:112.5489},'石家庄':{en:'Shijiazhuang',lat:38.0428,lon:114.5149},
+'合肥':{en:'Hefei',lat:31.8206,lon:117.2272},'南昌':{en:'Nanchang',lat:28.6820,lon:115.8579},
+'无锡':{en:'Wuxi',lat:31.4912,lon:120.3119},'常州':{en:'Changzhou',lat:31.8106,lon:119.9741},
+'徐州':{en:'Xuzhou',lat:34.2044,lon:117.2859},'扬州':{en:'Yangzhou',lat:32.3947,lon:119.4122},
+'盐城':{en:'Yancheng',lat:33.3477,lon:120.1634},'泰州':{en:'Taizhou',lat:32.4553,lon:119.9229},
+'镇江':{en:'Zhenjiang',lat:32.2044,lon:119.4529},'连云港':{en:'Lianyungang',lat:34.5966,lon:119.2216},
+'宿迁':{en:'Suqian',lat:33.9631,lon:118.2754},'南通':{en:'Nantong',lat:31.9802,lon:120.8943},
+'宁波':{en:'Ningbo',lat:29.8683,lon:121.5440},'温州':{en:'Wenzhou',lat:28.0006,lon:120.6722},
+'珠海':{en:'Zhuhai',lat:22.2710,lon:113.5767},'东莞':{en:'Dongguan',lat:23.0430,lon:113.7633},
+'佛山':{en:'Foshan',lat:23.0218,lon:113.1218},'中山':{en:'Zhongshan',lat:22.5176,lon:113.3926},
+'惠州':{en:'Huizhou',lat:23.1116,lon:114.4161},'汕头':{en:'Shantou',lat:23.3541,lon:116.6814},
+'洛阳':{en:'Luoyang',lat:34.6197,lon:112.4540},'烟台':{en:'Yantai',lat:37.4638,lon:121.4479},
+'潍坊':{en:'Weifang',lat:36.7068,lon:119.1019},'临沂':{en:'Linyi',lat:35.1041,lon:118.3564},
+'绍兴':{en:'Shaoxing',lat:30.0000,lon:120.5833},'嘉兴':{en:'Jiaxing',lat:30.7522,lon:120.7502},
+'金华':{en:'Jinhua',lat:29.0789,lon:119.6474},'台州':{en:'Taizhou_ZJ',lat:28.6561,lon:121.4207},
+'湖州':{en:'Huzhou',lat:30.8672,lon:120.0933},'丽水':{en:'Lishui',lat:28.4679,lon:119.9229},
+'衢州':{en:'Quzhou',lat:28.9569,lon:118.8594},'舟山':{en:'Zhoushan',lat:29.9853,lon:122.1074},
+'芜湖':{en:'Wuhu',lat:31.3340,lon:118.4328},'蚌埠':{en:'Bengbu',lat:32.9168,lon:117.3616},
+'桂林':{en:'Guilin',lat:25.2736,lon:110.2903},'柳州':{en:'Liuzhou',lat:24.3264,lon:109.4281},
+'大理':{en:'Dali',lat:25.6065,lon:100.2676},'丽江':{en:'Lijiang',lat:26.8550,lon:100.2270},
+'香港':{en:'Hong Kong',lat:22.3193,lon:114.1694},'澳门':{en:'Macau',lat:22.1987,lon:113.5439},
+'台北':{en:'Taipei',lat:25.0330,lon:121.5654},'东京':{en:'Tokyo',lat:35.6762,lon:139.6503},
+'首尔':{en:'Seoul',lat:37.5665,lon:126.9780},'新加坡':{en:'Singapore',lat:1.3521,lon:103.8198},
+'曼谷':{en:'Bangkok',lat:13.7563,lon:100.5018},'纽约':{en:'New York',lat:40.7128,lon:-74.0060},
+'伦敦':{en:'London',lat:51.5074,lon:-0.1278},'巴黎':{en:'Paris',lat:48.8566,lon:2.3522},
+'悉尼':{en:'Sydney',lat:-33.8688,lon:151.2093},'迪拜':{en:'Dubai',lat:25.2048,lon:55.2708}
+};
 function searchCity(){
   const q=document.getElementById('cityInput').value.trim();
   if(!q)return;
-  fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=zh`)
+  const raw=q.replace(/[市区县]/g,'');
+  const local=CN_CITIES[raw]||CN_CITIES[q];
+  if(local){currentCity={name:raw,en:local.en,lat:local.lat,lon:local.lon};loadWeather(currentCity);return}
+  fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=zh`)
     .then(r=>r.json()).then(d=>{
       if(d.results&&d.results.length){
-        const r=d.results[0];
+        const r=d.results.find(x=>x.population>100000)||d.results[0];
         currentCity={name:r.name,en:r.name,lat:r.latitude,lon:r.longitude};
         loadWeather(currentCity);
+      } else {
+        fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(raw)}&count=5`)
+          .then(r=>r.json()).then(d2=>{
+            if(d2.results&&d2.results.length){
+              const r=d2.results.find(x=>x.population>100000)||d2.results[0];
+              currentCity={name:q,en:r.name,lat:r.latitude,lon:r.longitude};
+              loadWeather(currentCity);
+            }
+          }).catch(()=>{});
       }
     }).catch(()=>{});
 }
